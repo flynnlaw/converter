@@ -85,8 +85,12 @@ class MainWindow(QMainWindow): #class for the main converter window
         
         input = int(self.choice1.currentIndex())
         output = int(self.choice2.currentIndex())
-        if input == output: 
-            self.outputbox.setText("Select where to convert from and where to convert to")
+        if input == 1 and output == 1:
+            self.outputbox.setText("You can't convert binary into itself")
+        elif input == 2 and output == 2:
+            self.outputbox.setText("You can't convert denary into itself")
+        elif input == 3 and output == 3: 
+            self.outputbox.setText("You can't convert hexadecimal into itself")
         elif int(self.choice1.currentIndex()) == 0 and int(self.choice2.currentIndex()) != 0:
             self.outputbox.setText("Select where to convert from")
         elif int(self.choice1.currentIndex()) != 0 and int(self.choice2.currentIndex()) == 0:
@@ -122,21 +126,22 @@ class Screen2(QDialog): #code for binary addition screen
     
     def pressed(self): #named the same for simpilicity
         result, overflow = BinaryAddition(self.input1.toPlainText(), self.input2.toPlainText())
-        if result == 1: 
-            self.outputboxadd.append("Invalid input, try again") #numbers relate to the first value returned by BinaryAddition()
-        elif result == 2: 
-            self.outputboxadd.append("8 bits are required")
-        elif result == 3:
-            self.outputboxadd.append("Invalid input, try again")
-        elif result == 4: 
-             self.outputboxadd.append("8 bits are required")
-        else:
-            self.outputboxadd.setText(str(result))
-            self.outputboxadd.append(str(int(result, 2)))
         if overflow == 1:
-            self.outputboxadd.append("there was an overflow") #numbers relate to the second balue returned by BinaryAddition()
+            self.outputboxadd.setText("there was an overflow") #numbers relate to the second balue returned by BinaryAddition()
         else:
-            self.outputboxadd.append("")
+            if result == 1: 
+                self.outputboxadd.append("Invalid input, try again") #numbers relate to the first value returned by BinaryAddition()
+            elif result == 2: 
+                self.outputboxadd.append("8 bits are required")
+            elif result == 3:
+                self.outputboxadd.append("Invalid input, try again")
+            elif result == 4: 
+                self.outputboxadd.append("8 bits are required")
+            else:
+                self.outputboxadd.setText("Binary: " + str(result))
+                self.outputboxadd.append("Denary: " + str(int(result, 2)))
+        
+        
         
 
     
