@@ -1,0 +1,111 @@
+import sys
+from PyQt5.uic import loadUi
+from PyQt5 import QtWidgets
+from PyQt5.QtWidgets import QDialog, QApplication, QMainWindow, QWidget
+from convert import BinaryToBinary, BinaryToHex, BinaryToDenary, DenaryToDenary, DenaryToBinary, DenaryToHex, HexToHex, HexToDenary, HexToBinary, BinaryAddition
+from abc import ABC,  abstractmethod
+
+class MainWindow(QMainWindow): #class for the main converter window
+    
+    
+    def __init__ (self):
+        super (MainWindow, self).__init__()
+        loadUi("gui3.ui",self)
+        self.binaryadditionbutton.clicked.connect(self.gotoScreen2) #code executes gotoScreen2() when binaryadditionbutton is pressed
+        self.Submitbutton.clicked.connect(self.pressed) #code executes pressed() when submitbutton is clicked
+        
+        
+        
+    def gotoScreen2(self):
+        widget.setCurrentIndex(widget.currentIndex()+1) #changes index by 1 to change page
+        
+    
+    def pressed(self): #different choices for the code depending on what is selected in the comboboxes choice1 and choice2
+        if int(self.choice1.currentIndex()) == 1 and int(self.choice2.currentIndex()) == 1:
+            result = BinaryToBinary(self.userentry.toPlainText())
+            self.outputbox.setText(result) #sets text of the output box to the result of the returned value from the subroutine
+        elif int(self.choice1.currentIndex()) == 1 and int(self.choice2.currentIndex()) == 2:
+            result = BinaryToDenary(self.userentry.toPlainText())
+            self.outputbox.setText(str(result))
+        elif int(self.choice1.currentIndex()) == 1 and int(self.choice2.currentIndex()) == 3:
+            result = BinaryToHex(self.userentry.toPlainText())
+            self.outputbox.setText(result)
+        elif int(self.choice1.currentIndex()) == 2 and int(self.choice2.currentIndex()) == 1:
+            result = DenaryToBinary(self.userentry.toPlainText())
+            self.outputbox.setText(result)
+        elif int(self.choice1.currentIndex()) == 2 and int(self.choice2.currentIndex()) == 2:
+            result = DenaryToDenary(self.userentry.toPlainText())
+            self.outputbox.setText(result)
+        elif int(self.choice1.currentIndex()) == 2 and int(self.choice2.currentIndex()) == 3:
+            result = DenaryToHex(self.userentry.toPlainText())
+            self.outputbox.setText(result)
+        elif int(self.choice1.currentIndex()) == 3 and int(self.choice2.currentIndex()) == 1:
+            result = HexToBinary(self.userentry.toPlainText())
+            self.outputbox.setText(result)
+        elif int(self.choice1.currentIndex()) == 3 and int(self.choice2.currentIndex()) == 2: 
+            result = HexToDenary(self.userentry.toPlainText())
+            self.outputbox.setText(str(result))
+        elif int(self.choice1.currentIndex()) == 3 and int(self.choice2.currentIndex()) == 3:
+            result = HexToHex(self.userentry.toPlainText())
+            self.outputbox.setText(result)
+        elif int(self.choice1.currentIndex()) == 0 and int(self.choice2.currentIndex()) != 0:
+            self.outputbox.setText("Select where to convert from")
+        elif int(self.choice1.currentIndex()) != 0 and int(self.choice2.currentIndex()) == 0:
+            self.outputbox.setText("Select where to convert to")
+        elif int(self.choice1.currentIndex()) == 0 and int(self.choice2.currentIndex()) == 0:
+            self.outputbox.setText("Select where to convert from and where to convert to")
+        #Index 0 = select, Index 1 = binary, Index 2 = denary, Index 3 = hexadecimal
+            
+class Screen2(QDialog): #code for binary addition screen
+    def __init__(self):
+        super(Screen2, self).__init__()
+        loadUi("gui32.ui",self)
+        self.backbutton.clicked.connect(self.gotoScreen1) #code executes go to screen1() when backbutton is clicked
+        self.addbutton.clicked.connect(self.pressed) #code executes pressed() when addbutton is clicked
+    
+    def gotoScreen1(self):
+        widget.setCurrentIndex(widget.currentIndex()-1)
+    
+    def pressed(self): #named the same for simpilicity
+        result, overflow = BinaryAddition(self.input1.toPlainText(), self.input2.toPlainText())
+        if result == 1: 
+            self.outputboxadd.append("Invalid input, try again") #numbers relate to the first value returned by BinaryAddition()
+        elif result == 2: 
+            self.outputboxadd.append("8 bits are required")
+        elif result == 3:
+            self.outputboxadd.append("Invalid input, try again")
+        elif result == 4: 
+             self.outputboxadd.append("8 bits are required")
+        else:
+            self.outputboxadd.setText(str(result))
+        if overflow == 1:
+            self.outputboxadd.append("there was an overflow") #numbers relate to the second balue returned by BinaryAddition()
+        else:
+            self.outputboxadd.append("")
+        
+
+
+
+
+# main
+app = QApplication(sys.argv)
+widget=QtWidgets.QStackedWidget()
+mainwindow=MainWindow()
+screen2=Screen2()
+widget.resize(600,300) #sets starting size of the windows 
+widget.addWidget(mainwindow)
+widget.addWidget(screen2)
+widget.show()
+#makes sure window is shown
+
+
+
+
+
+
+
+try:
+    sys.exit(app.exec_()) #pretty sure this runs all the time
+except:
+    print ("Exiting") #prints exiting when the program stops executing
+    

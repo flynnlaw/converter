@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>Dialog</class>
+ <widget class="QDialog" name="Dialog">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>592</width>
+    <height>324</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>Dialog</string>
+  </property>
+  <layout class="QGridLayout" name="gridLayout">
+   <item row="1" column="0">
+    <widget class="QTextEdit" name="input1">
+     <property name="styleSheet">
+      <string notr="true">QTextEdit{
+	border: 0px solid ;border-radius:8px; background-color: palette(base); 
+}
+
+QTextEdit:focus{
+	border: 1px solid rgb(255,105,97); border-radius:8px; background-color : palette(base)
+}
+
+QTextEdit:hover{
+	border: 1px solid rgb(255,105,97); border-radius:8px; background-color : palette(base)
+}</string>
+     </property>
+    </widget>
+   </item>
+   <item row="2" column="0">
+    <widget class="QLabel" name="label_2">
+     <property name="text">
+      <string>+</string>
+     </property>
+     <property name="alignment">
+      <set>Qt::AlignCenter</set>
+     </property>
+    </widget>
+   </item>
+   <item row="2" column="1">
+    <widget class="QLabel" name="label_3">
+     <property name="text">
+      <string>=</string>
+     </property>
+     <property name="alignment">
+      <set>Qt::AlignCenter</set>
+     </property>
+    </widget>
+   </item>
+   <item row="2" column="2" colspan="2">
+    <widget class="QTextBrowser" name="outputboxadd">
+     <property name="styleSheet">
+      <string notr="true">QTextBrowser:hover{
+	border: 1px solid rgb(193,225,193); border-radius:8px; background-color : palette(base)
+}
+
+QTextBrowser{
+	border: 1px  ; border-radius:8px; background-color : palette(base)
+}
+
+
+</string>
+     </property>
+    </widget>
+   </item>
+   <item row="3" column="0">
+    <widget class="QTextEdit" name="input2">
+     <property name="styleSheet">
+      <string notr="true">QTextEdit{
+	border: 0px solid ;border-radius:8px; background-color: palette(base); 
+}
+
+QTextEdit:focus{
+	border: 1px solid rgb(167,199,231); border-radius:8px; background-color : palette(base)
+}
+
+QTextEdit:hover{
+	border: 1px solid rgb(167,199,231); border-radius:8px; background-color : palette(base)
+}</string>
+     </property>
+    </widget>
+   </item>
+   <item row="3" column="1" colspan="2">
+    <widget class="QPushButton" name="addbutton">
+     <property name="text">
+      <string>Add</string>
+     </property>
+    </widget>
+   </item>
+   <item row="3" column="3">
+    <widget class="QPushButton" name="backbutton">
+     <property name="text">
+      <string>Back to converter</string>
+     </property>
+    </widget>
+   </item>
+   <item row="1" column="2" colspan="2">
+    <widget class="QLabel" name="label">
+     <property name="font">
+      <font>
+       <pointsize>24</pointsize>
+      </font>
+     </property>
+     <property name="text">
+      <string>Binary Addition</string>
+     </property>
+     <property name="alignment">
+      <set>Qt::AlignCenter</set>
+     </property>
+    </widget>
+   </item>
+  </layout>
+ </widget>
+ <resources/>
+ <connections/>
+</ui>
