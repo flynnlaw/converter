@@ -258,7 +258,7 @@ def BinaryAddition(binvalue1, binvalue2):
         print(binary1)
         
         if len(binary1) == 0:
-            return("Binary value(s) is/are empty"), 0
+            return 5,0
         
 
         for item in binary1:  #checks that all chracters inputted are in binary 0s and 1s
@@ -280,7 +280,7 @@ def BinaryAddition(binvalue1, binvalue2):
         binary2 = binary2.replace("\n", "")
         
         if len(binary2) == 0:
-            return("Binary value(s) is/are empty"), 0
+            return 5, 0
 
         for item in binary2:  #checks that all chracters inputted are in binary 0s and 1s
             if item not in {'0', '1'}:
@@ -307,6 +307,10 @@ def BinaryAddition(binvalue1, binvalue2):
         
         return(frontmorebit), 1
         
+    elif len(frontbit) < 8:
+        for add0 in range (len(frontbit), 8):
+            frontbit = "0" + frontbit
+        return (frontbit), 0
     else:
         return(frontbit), 0
 
